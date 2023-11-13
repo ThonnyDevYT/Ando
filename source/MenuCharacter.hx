@@ -56,11 +56,11 @@ class MenuCharacter extends FlxSprite
 				#if MODS_ALLOWED
 				var path:String = Paths.modFolders(characterPath);
 				if (!FileSystem.exists(path)) {
-					path = SUtil.getStorageDirectory() + Paths.getPreloadPath(characterPath);
+					path = SUtil.getPath() + Paths.getPreloadPath(characterPath);
 				}
 
 				if(!FileSystem.exists(path)) {
-					path = Paths.getPreloadPath(SUtil.getStorageDirectory() + 'images/menucharacters/' + DEFAULT_CHARACTER + '.json');
+					path = SUtil.getPath() + Paths.getPreloadPath('images/menucharacters/' + DEFAULT_CHARACTER + '.json');
 				}
 				rawJson = File.getContent(path);
 
@@ -77,7 +77,7 @@ class MenuCharacter extends FlxSprite
 				animation.addByPrefix('idle', charFile.idle_anim, 24);
 
 				var confirmAnim:String = charFile.confirm_anim;
-				if(confirmAnim != null && confirmAnim.length > 0 && confirmAnim != charFile.idle_anim)
+				if(confirmAnim != null && confirmAnim != charFile.idle_anim)
 				{
 					animation.addByPrefix('confirm', confirmAnim, 24, false);
 					if (animation.getByName('confirm') != null) //check for invalid animation

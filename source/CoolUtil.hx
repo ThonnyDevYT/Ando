@@ -1,12 +1,10 @@
 package;
 
-import flixel.util.FlxSave;
 import flixel.FlxG;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
-import flixel.system.FlxSound;
 #if sys
 import sys.io.File;
 import sys.FileSystem;
@@ -27,13 +25,6 @@ class CoolUtil
 
 	public static var difficulties:Array<String> = [];
 
-	inline public static function quantize(f:Float, snap:Float){
-		// changed so this actually works lol
-		var m:Float = Math.fround(f * snap);
-		trace(snap);
-		return (m / snap);
-	}
-	
 	public static function getDifficultyFilePath(num:Null<Int> = null)
 	{
 		if(num == null) num = PlayState.storyDifficulty;
@@ -125,11 +116,16 @@ class CoolUtil
 
 	//uhhhh does this even work at all? i'm starting to doubt
 	public static function precacheSound(sound:String, ?library:String = null):Void {
-		Paths.sound(sound, library);
+		precacheSoundFile(Paths.sound(sound, library));
 	}
 
 	public static function precacheMusic(sound:String, ?library:String = null):Void {
-		Paths.music(sound, library);
+		precacheSoundFile(Paths.music(sound, library));
+	}
+
+	private static function precacheSoundFile(file:Dynamic):Void {
+		if (Assets.exists(file, SOUND) || Assets.exists(file, MUSIC))
+			Assets.getSound(file, true);
 	}
 
 	public static function browserLoad(site:String) {
@@ -138,17 +134,5 @@ class CoolUtil
 		#else
 		FlxG.openURL(site);
 		#end
-	}
-
-	/** Quick Function to Fix Save Files for Flixel 5
-		if you are making a mod, you are gonna wanna change "ShadowMario" to something else
-		so Base Psych saves won't conflict with yours
-		@BeastlyGabi
-	**/
-	public static function getSavePath(folder:String = 'ShadowMario'):String {
-		@:privateAccess
-		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
-			+ '/'
-			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
 	}
 }
