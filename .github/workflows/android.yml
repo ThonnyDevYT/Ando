@@ -189,9 +189,9 @@ jobs:
           haxelib install flixel-ui 
           haxelib install flixel-addons
           haxelib install hscript
-          haxelib git linc_luajit clone https://github.com/jigsaw-4277821/linc_luajit.git
+          haxelib git linc_luajit clone https://github.com/superpowers04/linc_luajit
           haxelib git extension-androidtools clone https://github.com/jigsaw-4277821/extension-androidtools.git   
-          haxelib git extension-videoview clone https://github.com/jigsaw-4277821/extension-videoview.git --quiet
+          haxelib git extension-videoview clone https://github.com/sindresorhus/video-extensions
           haxelib list
           
       - name: Create Version Tag
