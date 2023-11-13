@@ -16,7 +16,7 @@ class SUtil
 {
     #if android
     private static var aDir:String = null;
-    private static var sPath:String = AndroidTools.getExternalStorageDirectory();  
+    //private static var sPath:String = AndroidTools.getExternalStorageDirectory();  
     //private static var grantedPermsList:Array<Permissions> = AndroidTools.getGrantedPermissions();  
     #end
 
@@ -27,10 +27,6 @@ class SUtil
         {
             return aDir;
         } 
-        else 
-        {
-            aDir = sPath + "/" + "." + Application.current.meta.get("file") + "/files/";         
-        }
         return aDir;
         #else
         return "";
@@ -40,14 +36,6 @@ class SUtil
     static public function doTheCheck()
     {
         #if android
-
-        if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file"))){
-            FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file"));
-        }
-
-        if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file") + "/files")){
-            FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file") + "/files");
-        }
 
         if (!FileSystem.exists(SUtil.getPath() + "log")){
             FileSystem.createDirectory(SUtil.getPath() + "log");
