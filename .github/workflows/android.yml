@@ -46,7 +46,6 @@ jobs:
         run: |
           haxelib install hmm
           haxlib run hmm install
-          haxelib setup /home/runner/haxelib
           haxelib install hxcpp
           haxelib install lime 7.9.0
           haxelib install newgrounds 1.3.0
